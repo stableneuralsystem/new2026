@@ -3,9 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Предсказание на 2026 год</title>
+    <title>✨ Предсказание на 2026 год: Огненная Лошадь ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Poiret+One:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Poiret+One:wght@400;600&display=swap');
+        /* ==================================== */
+        /* CSS Variables & Global Styles        */
+        /* ==================================== */
+
+        :root {
+            /* Цвета */
+            --bg-dark: #020111;
+            --bg-mid: #191f3a;
+            --bg-light: #2c3e50;
+            --text-color: #ffffff;
+            --neon-primary: #ff0000;
+            --neon-secondary: #ff4da6;
+            --button-start: #ff4d4d;
+            --button-end: #cc0000;
+
+            /* Анимация */
+            --snow-count: 60;
+            --animation-speed: 2.5s;
+            --typing-speed: 0.04s;
+            --transition-speed: 0.4s;
+        }
 
         body, html {
             margin: 0;
@@ -14,43 +35,60 @@
             height: 100%;
             font-family: 'Poiret One', cursive;
             overflow: hidden;
-            background-color: #000;
+            background-color: var(--bg-dark);
         }
 
         .banner {
             width: 100%;
             height: 100vh;
-            /* Зимняя ночь: темно-синий градиент */
-            background: linear-gradient(to bottom, #020111 10%, #191f3a 50%, #2c3e50 100%);
+            background: linear-gradient(to bottom, var(--bg-dark) 10%, var(--bg-mid) 50%, var(--bg-light) 100%);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            color: white;
+            color: var(--text-color);
             padding: 20px;
             box-sizing: border-box;
             position: relative;
             overflow: hidden;
         }
 
-        /* Эффект Северного сияния / Новогоднего волшебства */
-        .banner::before {
+        /* ==================================== */
+        /* Background Effects                   */
+        /* ==================================== */
+
+        /* Эффект Северного сияния / Новогоднего волшебства (улучшенный) */
+        .banner::before, .banner::after {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 255, 127, 0.1), transparent 70%),
-                        radial-gradient(circle, rgba(255, 0, 0, 0.05), transparent 60%);
-            animation: aurora 15s infinite linear;
-            z-index: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
+            z-index: 0;
         }
 
-        @keyframes aurora {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .banner::before {
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 127, 0.15) 1%, transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 0, 0.1) 1%, transparent 30%);
+            animation: aurora-move 20s infinite linear alternate;
+        }
+
+        .banner::after {
+            background: radial-gradient(circle at 50% 10%, rgba(176, 224, 230, 0.1) 1%, transparent 40%);
+            animation: aurora-pulse 15s infinite ease-in-out;
+        }
+
+        @keyframes aurora-move {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.1) translate(10px, -10px); }
+        }
+
+        @keyframes aurora-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
         /* Снежинки */
@@ -66,7 +104,7 @@
 
         .particle {
             position: absolute;
-            background: white;
+            background: var(--text-color);
             border-radius: 50%;
             opacity: 0.8;
             box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
@@ -74,36 +112,34 @@
         }
 
         @keyframes fall {
-            0% {
-                transform: translateY(-10vh) translateX(0);
-                opacity: 0;
-            }
+            0% { transform: translateY(-10vh) translateX(0); opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            100% {
-                transform: translateY(110vh) translateX(20px);
-                opacity: 0;
-            }
+            100% { transform: translateY(110vh) translateX(20px); opacity: 0; }
         }
 
+        /* ==================================== */
+        /* Content & Typography                 */
+        /* ==================================== */
+
         .title {
-            font-family: 'Marck Script', cursive; /* Более праздничный шрифт */
+            font-family: 'Marck Script', cursive;
             font-size: clamp(28px, 6vw, 42px);
             text-align: center;
             margin-top: 40px;
             position: relative;
             z-index: 1;
-            color: #fff;
+            color: var(--text-color);
             text-shadow: 
-                0 0 10px #ff0000,
-                0 0 20px #ff4da6,
-                0 0 40px #ff0000;
-            animation: neonGlow 2s ease-in-out infinite alternate;
+                0 0 10px var(--neon-primary),
+                0 0 20px var(--neon-secondary),
+                0 0 40px var(--neon-primary);
+            animation: neonGlow var(--animation-speed) ease-in-out infinite alternate;
         }
 
         @keyframes neonGlow {
-            from { text-shadow: 0 0 10px #fff, 0 0 20px #ff0000; }
-            to { text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff0000; }
+            from { text-shadow: 0 0 10px var(--text-color), 0 0 20px var(--neon-primary); }
+            to { text-shadow: 0 0 20px var(--text-color), 0 0 30px var(--neon-secondary), 0 0 40px var(--neon-primary); }
         }
 
         .wish-container {
@@ -130,20 +166,32 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 0 30px rgba(176, 224, 230, 0.2);
             max-width: 90%;
-            color: white;
+            color: var(--text-color);
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all var(--transition-speed) ease-out;
+        }
+        
+        .wish-text.active {
+            display: block;
+            transform: scale(1);
+            opacity: 1;
         }
 
+        /* Изменено: теперь класс letter применяется и к эмодзи */
         .word { display: inline-block; margin-right: 0.35em; }
-        .word:last-child { margin-right: 0; }
-        .letter { display: inline-block; opacity: 0; }
-        
-        .glowing { animation: glow 1.5s forwards; }
+        .letter { display: inline-block; opacity: 0; } 
+        .glowing { animation: glow 1s forwards; }
 
         @keyframes glow {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% { opacity: 0; transform: translateY(10px); filter: blur(2px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
+
+        /* ==================================== */
+        /* Button & Loading                     */
+        /* ==================================== */
 
         .button-container {
             width: 100%;
@@ -152,17 +200,17 @@
             margin-bottom: 50px;
             position: relative;
             z-index: 2;
+            transition: opacity var(--transition-speed);
         }
 
-        /* КРАСНАЯ НОВОГОДНЯЯ КНОПКА */
         .wish-button {
-            background: linear-gradient(180deg, #ff4d4d 0%, #cc0000 100%);
-            color: white;
+            background: linear-gradient(180deg, var(--button-start) 0%, var(--button-end) 100%);
+            color: var(--text-color);
             padding: 18px 40px;
             border-radius: 50px;
             font-size: clamp(16px, 4vw, 22px);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all var(--transition-speed) ease;
             font-family: 'Poiret One', cursive;
             font-weight: bold;
             border: 2px solid #ffcccc;
@@ -174,9 +222,9 @@
             letter-spacing: 1px;
             position: relative;
             overflow: hidden;
+            outline: none;
         }
 
-        /* Блик на кнопке */
         .wish-button::after {
             content: '';
             position: absolute;
@@ -204,18 +252,22 @@
             transform: scale(0.95);
         }
 
-        /* Загрузка со снежинками */
         .loading-container {
             display: none;
             flex-direction: column;
             align-items: center;
             gap: 15px;
+            transition: opacity var(--transition-speed);
+        }
+        
+        .loading-container.active {
+            display: flex;
         }
 
         .loading-text {
             font-size: 18px;
             color: #dbeeff;
-            text-shadow: 0 0 5px #fff;
+            text-shadow: 0 0 5px var(--text-color);
         }
 
         .spinner {
@@ -223,15 +275,18 @@
             height: 50px;
             border: 5px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            border-top-color: #fff;
+            border-top-color: var(--text-color);
             animation: spin 1s ease-in-out infinite;
-            box-shadow: 0 0 15px #fff;
+            box-shadow: 0 0 15px var(--text-color);
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
+        /* ==================================== */
+        /* Media Queries                        */
+        /* ==================================== */
         @media (max-width: 480px) {
             .title { margin-top: 20px; }
             .wish-button { padding: 15px 30px; width: 85%; }
@@ -240,7 +295,6 @@
 </head>
 <body>
     <div class="banner">
-        <!-- Снег -->
         <div class="particles" id="particles"></div>
         
         <h1 class="title">✨ 2026: Год Огненной Лошади ✨</h1>
@@ -260,34 +314,20 @@
     </div>
 
     <script>
-        // Генерация снега
-        function createSnow() {
-            const container = document.getElementById('particles');
-            const count = 60; // Количество снежинок
+        // ====================================
+        // JS Logic
+        // ====================================
+        const DOM = {
+            particles: document.getElementById('particles'),
+            wishButton: document.getElementById('wishButton'),
+            buttonContainer: document.getElementById('buttonContainer'),
+            wishText: document.getElementById('wishText'),
+            loadingContainer: document.getElementById('loadingContainer')
+        };
 
-            for (let i = 0; i < count; i++) {
-                const flake = document.createElement('div');
-                flake.className = 'particle';
-                
-                // Случайные параметры
-                const size = Math.random() * 4 + 2 + 'px';
-                flake.style.width = size;
-                flake.style.height = size;
-                flake.style.left = Math.random() * 100 + '%';
-                flake.style.animationDuration = (Math.random() * 5 + 5) + 's'; // Скорость падения
-                flake.style.animationDelay = (Math.random() * 5) + 's';
-                flake.style.opacity = Math.random() * 0.5 + 0.3;
-
-                container.appendChild(flake);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            createSnow();
-            
-            // ПОЖЕЛАНИЯ НА 2026 ГОД (Год Огненной Лошади)
-            const wishes2026 = [
-                "2026 год — год Огненной Лошади! Твоя карьера поскачет в гору с невероятной скоростью. Не бойся брать барьеры, победа будет за тобой!",
+        // Внимание: Я добавил больше эмодзи в предсказания для тестирования
+        const wishes2026 = [
+            "2026 год — год Огненной Лошади! Твоя карьера поскачет в гору с невероятной скоростью. Не бойся брать барьеры, победа будет за тобой!",
                 "В новом 2026 году тебя ждет грандиозное путешествие. Лошадь любит движение — собирай чемоданы, мир готов открыть тебе свои тайны!",
                 "Твоя энергия в 2026 году будет бить ключом! Это идеальное время, чтобы начать дело, о котором ты мечтал последнее время.",
                 "Огонь этого года разожжет в твоем сердце новые чувства. Любовь и страсть станут твоими главными спутниками в 2026 году.",
@@ -609,56 +649,112 @@
 "🏗️ В 2026 году ты построишь что-то важное: дом, карьеру или семью. Фундамент будет крепким, а стены надежными. Твой труд останется на века. Совет: строй на совесть! 🧱",
 
 "🦁 2026 год — это ТВОЙ год! Будь королем своей жизни, принимай решения и властвуй над обстоятельствами. Удача, успех и любовь уже ждут тебя у порога. Пожелание: бери от года всё! 🌟"
-            ];
-            
-            const wishButton = document.getElementById('wishButton');
-            const buttonContainer = document.getElementById('buttonContainer');
-            const wishText = document.getElementById('wishText');
-            const loadingContainer = document.getElementById('loadingContainer');
-            
-            wishButton.addEventListener('click', function() {
-                buttonContainer.style.display = 'none';
-                loadingContainer.style.display = 'flex';
-                wishText.style.display = 'none';
+        ];
+        
+        const TYPING_SPEED = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--typing-speed')) || 0.04;
+        const LOADING_TIME = 2500; // 2.5 секунды
+        const RESET_TIME = 2000; // 2 секунды после завершения анимации текста
+
+        /**
+         * Генерирует и добавляет снежинки на экран.
+         */
+        function createSnow() {
+            const count = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--snow-count')) || 60;
+
+            for (let i = 0; i < count; i++) {
+                const flake = document.createElement('div');
+                flake.className = 'particle';
                 
-                // Звук волшебства (можно добавить опционально)
-                // const audio = new Audio('magic.mp3'); audio.play();
+                const size = Math.random() * 4 + 2 + 'px';
+                flake.style.width = size;
+                flake.style.height = size;
+                flake.style.left = Math.random() * 100 + '%';
+                flake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                flake.style.animationDelay = (Math.random() * 5) + 's';
+                flake.style.opacity = Math.random() * 0.5 + 0.3;
 
-                setTimeout(() => {
-                    loadingContainer.style.display = 'none';
-                    
-                    const randomWish = wishes2026[Math.floor(Math.random() * wishes2026.length)];
-                    
-                    wishText.style.display = 'block';
-                    wishText.innerHTML = '';
-                    
-                    // Появление текста
-                    const words = randomWish.split(' ');
-                    let delay = 0;
-                    
-                    words.forEach(function(word) {
-                        const wordSpan = document.createElement('span');
-                        wordSpan.className = 'word';
-                        
-                        for (let i = 0; i < word.length; i++) {
-                            const letterSpan = document.createElement('span');
-                            letterSpan.textContent = word[i];
-                            letterSpan.className = 'letter glowing';
-                            letterSpan.style.animationDelay = delay + 's';
-                            wordSpan.appendChild(letterSpan);
-                            delay += 0.04; 
-                        }
-                        wishText.appendChild(wordSpan);
-                    });
+                DOM.particles.appendChild(flake);
+            }
+        }
 
-                    // Возвращаем кнопку через некоторое время, чтобы можно было гадать еще раз
-                    setTimeout(() => {
-                        buttonContainer.style.display = 'flex';
-                        wishButton.textContent = "Получить еще одно предсказание";
-                    }, delay * 1000 + 2000);
-                    
-                }, 2500); // Время "гаданий"
+        /**
+         * Анимирует появление текста по символам/эмодзи.
+         * Использует Array.from() для корректной обработки многобайтовых символов и эмодзи.
+         * @param {string} text - Текст для анимации.
+         * @returns {number} Общее время анимации в миллисекундах.
+         */
+        function animateText(text) {
+            DOM.wishText.innerHTML = ''; // Очистка предыдущего текста
+            const words = text.split(' ');
+            let delay = 0;
+            
+            words.forEach(function(word, wordIndex) {
+                const wordSpan = document.createElement('span');
+                wordSpan.className = 'word';
+                
+                // Ключевое изменение: используем Array.from() для правильного разбиения на графемные кластеры (символы, включая эмодзи)
+                const characters = Array.from(word); 
+
+                characters.forEach(function(char) {
+                    const letterSpan = document.createElement('span');
+                    letterSpan.textContent = char;
+                    letterSpan.className = 'letter glowing';
+                    letterSpan.style.animationDelay = delay + 's';
+                    wordSpan.appendChild(letterSpan);
+                    delay += TYPING_SPEED; // Увеличение задержки
+                });
+
+                // Добавление пробела после слова, кроме последнего
+                if (wordIndex < words.length - 1) {
+                    const spaceSpan = document.createElement('span');
+                    spaceSpan.textContent = '\u00A0'; // Неразрывный пробел
+                    wordSpan.appendChild(spaceSpan);
+                }
+                
+                DOM.wishText.appendChild(wordSpan);
             });
+            
+            return delay * 1000;
+        }
+
+        /**
+         * Основная функция для получения и отображения предсказания.
+         */
+        function getPrediction() {
+            // 1. Скрытие кнопки и текста, показ загрузки
+            DOM.buttonContainer.style.opacity = 0;
+            DOM.buttonContainer.style.pointerEvents = 'none';
+            DOM.wishText.classList.remove('active');
+            DOM.loadingContainer.classList.add('active');
+
+            setTimeout(() => {
+                // 2. Скрытие загрузки
+                DOM.loadingContainer.classList.remove('active');
+                
+                // 3. Выбор случайного предсказания
+                const randomWish = wishes2026[Math.floor(Math.random() * wishes2026.length)];
+                
+                // 4. Анимация текста и отображение
+                const totalAnimationTime = animateText(randomWish);
+                DOM.wishText.classList.add('active');
+
+                // 5. Возвращение кнопки после завершения анимации текста
+                setTimeout(() => {
+                    DOM.wishButton.textContent = "Получить еще одно предсказание";
+                    DOM.buttonContainer.style.opacity = 1;
+                    DOM.buttonContainer.style.pointerEvents = 'auto';
+                }, totalAnimationTime + RESET_TIME);
+                
+            }, LOADING_TIME); 
+        }
+
+        // ====================================
+        // Event Listeners
+        // ====================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            createSnow();
+            DOM.wishButton.addEventListener('click', getPrediction);
         });
     </script>
 </body>
