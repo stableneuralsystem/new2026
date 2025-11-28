@@ -25,6 +25,13 @@
             --typing-speed: 0.04s;
             --transition-speed: 0.4s;
             --snow-count: 80; 
+
+            /* Цвета для нового подарка */
+            --gift-box-color: #f7d777; /* Основной цвет коробки */
+            --gift-stripe-color: #e0ac2c; /* Цвет полос */
+            --gift-ribbon-color: #d12c2c; /* Цвет ленты */
+            --gift-ribbon-shadow: #a32222; /* Тень ленты */
+            --gift-glow-color: #6efff0; /* Цвет свечения подарка */
         }
 
         body, html {
@@ -70,13 +77,10 @@
             position: absolute;
             background: white;
             border-radius: 50%;
-            /* ИСПРАВЛЕНО: Вернули анимацию падения (fall) и убрали !important, 
-               чтобы JS мог управлять скоростью падения */
             animation: fall linear infinite; 
-            box-shadow: 0 0 4px rgba(255, 255, 255, 0.8); /* Добавили свечение снежинкам */
+            box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
         }
 
-        /* Анимация падения сверху вниз */
         @keyframes fall {
             0% { transform: translateY(-10vh) translateX(0); opacity: 0; }
             10% { opacity: 1; }
@@ -96,12 +100,74 @@
             z-index: 2;
         }
 
-        .gift-icon {
-            width: 60px;
-            height: 60px;
+        /* Новый контейнер для анимированного подарка */
+        .gift-animation-container {
+            width: 100px; /* Размер контейнера для подарка */
+            height: 100px;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(253, 219, 146, 0.6));
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Анимация парения */
+            animation: float 4s ease-in-out infinite alternate;
         }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Новый стиль SVG подарка */
+        .animated-gift {
+            width: 80px; /* Размер самого подарка внутри контейнера */
+            height: 80px;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 0 8px rgba(0,0,0,0.4)); /* Базовая тень */
+        }
+
+        /* Эффект свечения для подарка */
+        .gift-glow {
+            position: absolute;
+            width: 120%; /* Свечение больше подарка */
+            height: 120%;
+            background: radial-gradient(circle, var(--gift-glow-color) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0.6;
+            z-index: 0;
+            /* Анимация пульсации свечения */
+            animation: pulsateGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulsateGlow {
+            0% { transform: scale(0.8); opacity: 0.4; }
+            50% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(0.8); opacity: 0.4; }
+        }
+
+        /* Маленькие искры вокруг подарка */
+        .sparkle {
+            position: absolute;
+            background: var(--gift-glow-color);
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkleAppear 1.5s ease-out infinite;
+            z-index: 2;
+        }
+        .sparkle:nth-child(1) { width: 3px; height: 3px; top: 10%; left: 20%; animation-delay: 0.2s; }
+        .sparkle:nth-child(2) { width: 2px; height: 2px; top: 30%; right: 15%; animation-delay: 0.5s; }
+        .sparkle:nth-child(3) { width: 4px; height: 4px; bottom: 15%; left: 40%; animation-delay: 0.8s; }
+        .sparkle:nth-child(4) { width: 2px; height: 2px; top: 5%; right: 40%; animation-delay: 1.1s; }
+
+
+        @keyframes sparkleAppear {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.5); }
+        }
+
 
         .title {
             font-family: 'Playfair Display', serif;
@@ -290,7 +356,8 @@
 
         @media (max-height: 700px) {
              .header-content { margin-top: 2vh; }
-             .gift-icon { width: 40px; height: 40px; margin-bottom: 10px;}
+             .gift-animation-container { width: 80px; height: 80px; margin-bottom: 10px;}
+             .animated-gift { width: 60px; height: 60px; }
         }
     </style>
 </head>
@@ -299,13 +366,58 @@
         <div class="particles" id="particles"></div>
         
         <div class="header-content">
-            <svg class="gift-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 5.25V18.75" stroke="#FDDB92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M5.25 9.75H18.75" stroke="#FDDB92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M11.5789 5.25C11.5789 5.25 9.68421 3 7.15789 3C4.63158 3 3 5.25 3 7.5C3 9.75 5.25 9.75 5.25 9.75H11.5789V5.25Z" stroke="#FDDB92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M12.4211 5.25C12.4211 5.25 14.3158 3 16.8421 3C19.3684 3 21 5.25 21 7.5C21 9.75 18.75 9.75 18.75 9.75H12.4211V5.25Z" stroke="#FDDB92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M5.25 9.75V18.15C5.25 19.3926 6.25736 20.4 7.5 20.4H16.5C17.7426 20.4 18.75 19.3926 18.75 18.15V9.75" stroke="#FDDB92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <div class="gift-animation-container">
+                <div class="gift-glow"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <svg class="animated-gift" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="15" y="30" width="70" height="45" rx="8" fill="var(--gift-box-color)"/>
+                    <rect x="15" y="30" width="70" height="45" rx="8" fill="url(#boxGradient)"/>
+                    <path d="M15 30H85V75H15V30Z" fill="url(#stripes)"/>
+
+                    <path d="M15 30 L50 15 L85 30 L50 45 L15 30Z" fill="var(--gift-box-color)"/>
+                    <path d="M15 30 L50 15 L85 30 L50 45 L15 30Z" fill="url(#lidGradient)"/>
+                    <path d="M15 30 L50 15 L85 30 L50 45 L15 30Z" fill="url(#stripesLid)"/>
+
+                    <rect x="42.5" y="15" width="15" height="60" fill="var(--gift-ribbon-color)"/>
+                    <rect x="42.5" y="15" width="15" height="60" fill="url(#ribbonGradient)"/>
+
+                    <rect x="15" y="47.5" width="70" height="15" fill="var(--gift-ribbon-color)"/>
+                    <rect x="15" y="47.5" width="70" height="15" fill="url(#ribbonGradientH)"/>
+                    
+                    <path d="M50 15 C55 5 60 0 65 5 C70 10 65 15 60 20 C55 25 50 20 50 15Z" fill="var(--gift-ribbon-color)"/>
+                    <path d="M50 15 C45 5 40 0 35 5 C30 10 35 15 40 20 C45 25 50 20 50 15Z" fill="var(--gift-ribbon-color)"/>
+                    <circle cx="50" cy="15" r="5" fill="var(--gift-ribbon-shadow)"/>
+
+                    <defs>
+                        <linearGradient id="boxGradient" x1="50" y1="30" x2="50" y2="75" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#fff" stop-opacity="0.2"/>
+                            <stop offset="1" stop-color="#000" stop-opacity="0.1"/>
+                        </linearGradient>
+                        <linearGradient id="lidGradient" x1="50" y1="15" x2="50" y2="45" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#fff" stop-opacity="0.2"/>
+                            <stop offset="1" stop-color="#000" stop-opacity="0.1"/>
+                        </linearGradient>
+                        <linearGradient id="ribbonGradient" x1="50" y1="15" x2="50" y2="75" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#fff" stop-opacity="0.3"/>
+                            <stop offset="1" stop-color="#000" stop-opacity="0.2"/>
+                        </linearGradient>
+                         <linearGradient id="ribbonGradientH" x1="15" y1="55" x2="85" y2="55" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#fff" stop-opacity="0.2"/>
+                            <stop offset="1" stop-color="#000" stop-opacity="0.1"/>
+                        </linearGradient>
+
+                        <pattern id="stripes" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(45)">
+                            <line x1="0" y1="0" x2="0" y2="10" stroke="var(--gift-stripe-color)" stroke-width="2"/>
+                        </pattern>
+                         <pattern id="stripesLid" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(45)">
+                            <line x1="0" y1="0" x2="0" y2="10" stroke="var(--gift-stripe-color)" stroke-width="2"/>
+                        </pattern>
+                    </defs>
+                </svg>
+            </div>
 
             <h1 class="title">С Новым 2026 Годом!</h1>
             <p class="subtitle">Приготовьтесь получить ваше персональное новогоднее пожелание</p>
@@ -355,7 +467,7 @@
         };
 
         const wishes2026 = [
-            "2026 год — год Огненной Лошади! Твоя карьера поскачет в гору с невероятной скоростью. Не бойся брать барьеры, победа будет за тобой!",
+           "2026 год — год Огненной Лошади! Твоя карьера поскачет в гору с невероятной скоростью. Не бойся брать барьеры, победа будет за тобой!",
                 "В новом 2026 году тебя ждет грандиозное путешествие. Лошадь любит движение — собирай чемоданы, мир готов открыть тебе свои тайны!",
                 "Твоя энергия в 2026 году будет бить ключом! Это идеальное время, чтобы начать дело, о котором ты мечтал последнее время.",
                 "Огонь этого года разожжет в твоем сердце новые чувства. Любовь и страсть станут твоими главными спутниками в 2026 году.",
