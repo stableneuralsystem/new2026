@@ -3,66 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>С Новым 2026 Годом!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <title>Новогоднее предсказание на 2026 год</title>
     <style>
-        /* ==================================== */
-        /* CSS Variables & Global Styles        */
-        /* ==================================== */
-
-        :root {
-            --bg-dark: #0a1229;
-            --bg-center: #132144;
-            --text-gold: #fddb92;
-            --text-blue-grey: #8da0c6;
-            --accent-cyan: #4deeea;
-            --button-grad-start: #efc646;
-            --button-grad-end: #2fbed6;
-            
-            /* Параметры JS */
-            --text-color: #ffffff;
-            --animation-speed: 2.5s;
-            --typing-speed: 0.04s;
-            --transition-speed: 0.4s;
-            --snow-count: 80; 
-
-            /* Цвета для нового подарка */
-            --gift-box-color: #f7d777; /* Основной цвет коробки */
-            --gift-stripe-color: #e0ac2c; /* Цвет полос */
-            --gift-ribbon-color: #d12c2c; /* Цвет ленты */
-            --gift-ribbon-shadow: #a32222; /* Тень ленты */
-            --gift-glow-color: #6efff0; /* Цвет свечения подарка */
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Poiret+One:wght@400;600&display=swap');
 
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Poiret One', 'Segoe UI Emoji', 'Noto Color Emoji', 'Apple Color Emoji', sans-serif;
+            background: linear-gradient(180deg, #09101c, #0f1c2e 60%, #0a0f18);
             overflow: hidden;
-            background-color: var(--bg-dark);
+            color: white;
         }
 
         .banner {
             width: 100%;
             height: 100vh;
-            background: radial-gradient(ellipse at bottom center, var(--bg-center) 0%, var(--bg-dark) 80%);
+            background: radial-gradient(ellipse at top, #1a0a0a 0%, #0a1a2a 30%, #050a15 70%, #000508 100%);
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
-            color: var(--text-color);
+            color: white;
             padding: 20px;
             box-sizing: border-box;
             position: relative;
             overflow: hidden;
         }
 
-        /* ==================================== */
-        /* Snow / Particles Animation           */
-        /* ==================================== */
+        /* Новогоднее сияние */
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(255, 50, 50, 0.2) 0%, rgba(255, 100, 100, 0.1) 30%, transparent 60%),
+                radial-gradient(ellipse at 30% 0%, rgba(255, 215, 0, 0.15) 0%, transparent 40%),
+                radial-gradient(ellipse at 70% 0%, rgba(50, 150, 255, 0.15) 0%, transparent 40%);
+            z-index: 0;
+            animation: christmasGlow 4s ease-in-out infinite alternate;
+        }
 
+        /* Звездное поле */
+        .banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.9) 1.5px, transparent 2px),
+                radial-gradient(circle at 85% 30%, rgba(255, 215, 0, 0.8) 1px, transparent 2px),
+                radial-gradient(circle at 25% 60%, rgba(255, 255, 255, 0.7) 1.5px, transparent 2px),
+                radial-gradient(circle at 75% 80%, rgba(255, 100, 100, 0.6) 1px, transparent 2px),
+                radial-gradient(circle at 45% 40%, rgba(100, 200, 255, 0.5) 1px, transparent 2px),
+                radial-gradient(circle at 65% 15%, rgba(255, 255, 255, 0.8) 1.5px, transparent 2px),
+                radial-gradient(circle at 35% 85%, rgba(255, 215, 0, 0.6) 1px, transparent 2px),
+                radial-gradient(circle at 55% 25%, rgba(255, 150, 150, 0.7) 1px, transparent 2px);
+            z-index: 0;
+            animation: starTwinkle 6s ease-in-out infinite;
+        }
+
+        @keyframes christmasGlow {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 0.9; transform: scale(1.15); }
+        }
+
+        @keyframes starTwinkle {
+            0% { opacity: 0.4; }
+            25% { opacity: 1; }
+            50% { opacity: 0.6; }
+            75% { opacity: 0.95; }
+            100% { opacity: 0.5; }
+        }
+
+        /* Снежинки */
         .particles {
             position: absolute;
             top: 0;
@@ -75,134 +96,67 @@
 
         .particle {
             position: absolute;
-            background: white;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(220, 240, 255, 0.9) 40%, rgba(255, 255, 255, 0.8) 100%);
             border-radius: 50%;
-            animation: fall linear infinite; 
-            box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+            animation: snowfall 8s infinite linear;
+            opacity: 0.9;
+            box-shadow: 
+                0 0 6px rgba(255, 255, 255, 0.8), 
+                0 0 12px rgba(200, 230, 255, 0.6),
+                0 0 18px rgba(255, 255, 255, 0.4);
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-10vh) translateX(0); opacity: 0; }
+        .particle.large { width: 12px; height: 12px; animation-duration: 12s; }
+        .particle.small { width: 4px; height: 4px; animation-duration: 6s; }
+
+        @keyframes snowfall {
+            0% { transform: translateY(-100px) rotate(0deg) translateX(0px); opacity: 0; }
             10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(110vh) translateX(20px); opacity: 0; }
+            90% { opacity: 0.9; }
+            100% { transform: translateY(100vh) rotate(720deg) translateX(var(--drift, 0px)); opacity: 0; }
         }
 
-        /* ==================================== */
-        /* Header Content                       */
-        /* ==================================== */
-        
-        .header-content {
-            margin-top: 6vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 2;
+        @keyframes twinkle {
+            0% { box-shadow: 0 0 4px rgba(255, 255, 255, 0.6), 0 0 8px rgba(200, 230, 255, 0.4); opacity: 0.6; transform: scale(0.9); }
+            100% { box-shadow: 0 0 12px rgba(255, 255, 255, 1), 0 0 20px rgba(200, 230, 255, 0.9); opacity: 1; transform: scale(1.3); }
         }
-
-        /* Новый контейнер для анимированного подарка */
-        .gift-animation-container {
-            width: 100px; /* Размер контейнера для подарка */
-            height: 100px;
-            margin-bottom: 20px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /* Анимация парения */
-            animation: float 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Новый стиль SVG подарка */
-        .animated-gift {
-            width: 80px; /* Размер самого подарка внутри контейнера */
-            height: 80px;
-            position: relative;
-            z-index: 1;
-            filter: drop-shadow(0 0 8px rgba(0,0,0,0.4)); /* Базовая тень */
-        }
-
-        /* Эффект свечения для подарка */
-        .gift-glow {
-            position: absolute;
-            width: 120%; /* Свечение больше подарка */
-            height: 120%;
-            background: radial-gradient(circle, var(--gift-glow-color) 0%, transparent 70%);
-            border-radius: 50%;
-            opacity: 0.6;
-            z-index: 0;
-            /* Анимация пульсации свечения */
-            animation: pulsateGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulsateGlow {
-            0% { transform: scale(0.8); opacity: 0.4; }
-            50% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(0.8); opacity: 0.4; }
-        }
-
-        /* Маленькие искры вокруг подарка */
-        .sparkle {
-            position: absolute;
-            background: var(--gift-glow-color);
-            border-radius: 50%;
-            opacity: 0;
-            animation: sparkleAppear 1.5s ease-out infinite;
-            z-index: 2;
-        }
-        .sparkle:nth-child(1) { width: 3px; height: 3px; top: 10%; left: 20%; animation-delay: 0.2s; }
-        .sparkle:nth-child(2) { width: 2px; height: 2px; top: 30%; right: 15%; animation-delay: 0.5s; }
-        .sparkle:nth-child(3) { width: 4px; height: 4px; bottom: 15%; left: 40%; animation-delay: 0.8s; }
-        .sparkle:nth-child(4) { width: 2px; height: 2px; top: 5%; right: 40%; animation-delay: 1.1s; }
-
-
-        @keyframes sparkleAppear {
-            0% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(0.5); }
-        }
-
 
         .title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(32px, 7vw, 58px);
-            font-weight: 700;
+            font-size: clamp(22px, 4.5vw, 32px);
             text-align: center;
-            margin: 0;
-            color: var(--text-gold);
-            text-shadow: 0 0 15px rgba(239, 198, 70, 0.5);
+            margin-top: 30px;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 
+                0 0 15px rgba(255, 100, 100, 0.6),
+                0 0 25px rgba(255, 215, 0, 0.4),
+                0 0 35px rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.85), rgba(178, 34, 34, 0.75));
+            padding: 20px 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            color: white;
+            font-weight: 600;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+            box-shadow: 
+                0 0 30px rgba(255, 50, 50, 0.3),
+                inset 0 0 20px rgba(255, 215, 0, 0.1);
         }
 
-        .subtitle {
-            font-size: clamp(16px, 3vw, 20px);
-            text-align: center;
-            color: var(--text-blue-grey);
-            margin-top: 15px;
-            max-width: 600px;
-            line-height: 1.4;
+        @keyframes titleGlow {
+            0% {
+                box-shadow: 0 0 25px rgba(255, 50, 50, 0.4), 0 0 15px rgba(255, 215, 0, 0.2);
+                text-shadow: 0 0 12px rgba(255, 100, 100, 0.6), 0 0 20px rgba(255, 215, 0, 0.4);
+            }
+            100% {
+                box-shadow: 0 0 40px rgba(255, 50, 50, 0.6), 0 0 25px rgba(255, 215, 0, 0.4);
+                text-shadow: 0 0 20px rgba(255, 100, 100, 0.8), 0 0 30px rgba(255, 215, 0, 0.6);
+            }
         }
-
-        .decoration-sparks {
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-            color: var(--accent-cyan);
-            filter: drop-shadow(0 0 5px var(--accent-cyan));
-        }
-        .decoration-sparks svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* ==================================== */
-        /* Text Area                            */
-        /* ==================================== */
 
         .wish-container {
             flex-grow: 1;
@@ -214,150 +168,203 @@
             padding: 20px;
             box-sizing: border-box;
             position: relative;
-            z-index: 2;
-            min-height: 200px;
+            z-index: 1;
         }
 
         .wish-text {
             display: none;
-            font-size: clamp(18px, 4vw, 24px);
-            line-height: 1.6;
-            background: rgba(19, 33, 68, 0.6);
-            padding: clamp(30px, 5vw, 50px);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(77, 238, 234, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            max-width: 85%;
-            color: #fff;
-            transform: translateY(20px);
+            font-size: clamp(16px, 3.5vw, 22px);
+            line-height: 1.8;
+            word-spacing: 4px;
+            letter-spacing: 1.5px;
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.9), rgba(25, 25, 60, 0.85));
+            padding: clamp(25px, 5vw, 45px);
+            border-radius: 25px;
+            backdrop-filter: blur(20px);
+            border: 3px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 
+                0 0 40px rgba(255, 50, 50, 0.4),
+                0 0 20px rgba(255, 215, 0, 0.3),
+                inset 0 0 30px rgba(255, 215, 0, 0.08);
+            max-width: 90%;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .word {
+            display: inline-block;
+            margin-right: 0.35em;
+            white-space: nowrap; /* Важно: чтобы слово не разрывалось */
+        }
+
+        .word:last-child {
+            margin-right: 0;
+        }
+
+        .letter {
+            display: inline-block;
             opacity: 0;
-            transition: all 0.6s ease-out;
-        }
-        
-        .wish-text.active {
-            display: block;
-            transform: translateY(0);
-            opacity: 1;
         }
 
-        .word { display: inline-block; white-space: nowrap; margin-right: 0.3em; }
-        .letter { display: inline-block; opacity: 0; } 
-        .glowing { animation: glamGlow 0.8s forwards; }
-
-        @keyframes glamGlow {
-            0% { opacity: 0; transform: scale(0.8); text-shadow: none;}
-            50% { text-shadow: 0 0 10px var(--accent-cyan); color: var(--accent-cyan); }
-            100% { opacity: 1; transform: scale(1); text-shadow: 0 0 2px rgba(255,255,255,0.5); color: #fff; }
+        .glowing {
+            animation: glow 2s forwards;
         }
 
-        /* ==================================== */
-        /* Button & Loading                     */
-        /* ==================================== */
+        @keyframes glow {
+            0% { opacity: 0; text-shadow: 0 0 8px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 100, 100, 0.6); }
+            50% { opacity: 1; text-shadow: 0 0 25px rgba(255, 215, 0, 1), 0 0 35px rgba(255, 150, 150, 0.8); }
+            100% { opacity: 1; text-shadow: 0 0 10px rgba(255, 215, 0, 0.6), 0 0 18px rgba(255, 100, 100, 0.4); }
+        }
 
         .button-container {
             width: 100%;
             display: flex;
             justify-content: center;
-            margin-bottom: 8vh;
+            margin-bottom: 40px;
             position: relative;
-            z-index: 3;
-            transition: opacity var(--transition-speed);
+            z-index: 1;
         }
 
         .wish-button {
-            background: linear-gradient(90deg, var(--button-grad-start) 0%, var(--button-grad-end) 100%);
-            color: #0a1229;
-            padding: 16px 32px;
-            border-radius: 12px;
-            font-size: clamp(16px, 4vw, 18px);
+            background: linear-gradient(135deg, #c41e3a, #8b0000, #dc143c);
+            color: white;
+            padding: clamp(14px, 3.5vw, 22px) clamp(30px, 7vw, 50px);
+            border-radius: 50px;
+            font-size: clamp(16px, 3.8vw, 24px);
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            border: none;
-            box-shadow: 
-                0 4px 15px rgba(239, 198, 70, 0.3),
-                0 4px 15px rgba(47, 190, 214, 0.3);
-            outline: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 1.5px;
+            font-family: 'Poiret One', cursive;
+            font-weight: 600;
             position: relative;
             overflow: hidden;
-        }
-
-        .btn-icon {
-            width: 20px;
-            height: 20px;
-            fill: #0a1229;
+            border: 3px solid rgba(255, 215, 0, 0.5);
+            outline: none;
+            box-shadow:
+                0 10px 30px rgba(196, 30, 58, 0.6),
+                0 0 0 2px rgba(255, 215, 0, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.25),
+                0 0 25px rgba(220, 20, 60, 0.4);
+            backdrop-filter: blur(10px);
+            text-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.6),
+                0 0 10px rgba(255, 215, 0, 0.4);
         }
 
         .wish-button::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: 0.5s;
-            transform: skewX(-20deg);
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.6), rgba(255, 100, 100, 0.7), rgba(255, 215, 0, 0.6), rgba(220, 20, 60, 0.8));
+            z-index: -1;
+            border-radius: 53px;
+            animation: buttonBorderGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes buttonBorderGlow {
+            0% { opacity: 0.6; filter: blur(8px); }
+            100% { opacity: 1; filter: blur(12px); }
+        }
+
+        .wish-button::after {
+            content: '❄️ ✨';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.8em;
+            opacity: 0;
+            pointer-events: none;
+            animation: sparkle 3s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            50% { opacity: 0.4; transform: translate(-50%, -50%) scale(1.2); }
         }
 
         .wish-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 
-                0 6px 20px rgba(239, 198, 70, 0.5),
-                0 6px 20px rgba(47, 190, 214, 0.5);
-        }
-
-        .wish-button:hover::before {
-            left: 100%;
+            transform: translateY(-4px) scale(1.05);
+            background: linear-gradient(135deg, #dc143c, #b22222, #ff4500);
+            box-shadow:
+                0 15px 45px rgba(196, 30, 58, 0.8),
+                0 0 0 3px rgba(255, 215, 0, 0.5),
+                0 0 40px rgba(220, 20, 60, 0.6),
+                inset 0 0 20px rgba(255, 215, 0, 0.2);
         }
 
         .wish-button:active {
-            transform: translateY(1px);
+            transform: translateY(2px) scale(0.98);
         }
 
+        /* Анимация загрузки */
         .loading-container {
             display: none;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
-            transition: opacity var(--transition-speed);
-        }
-        
-        .loading-container.active {
-            display: flex;
+            gap: 25px;
         }
 
         .loading-text {
-            font-size: 18px;
-            color: var(--text-blue-grey);
-            letter-spacing: 1px;
+            font-size: clamp(15px, 3.2vw, 20px);
+            color: rgba(255, 255, 255, 0.95);
+            text-align: center;
+            letter-spacing: 1.5px;
+            text-shadow: 
+                0 0 15px rgba(255, 215, 0, 0.6),
+                0 0 25px rgba(255, 100, 100, 0.4);
         }
 
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(77, 238, 234, 0.2);
+        .loading-spinner {
+            position: relative;
+            width: 70px;
+            height: 70px;
+        }
+
+        .spinner-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(135deg, #ff6b6b, #ffd700);
             border-radius: 50%;
-            border-top-color: var(--button-grad-start);
-            border-right-color: var(--button-grad-end);
-            animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-            box-shadow: 0 0 15px rgba(77, 238, 234, 0.3);
+            box-shadow: 
+                0 0 15px rgba(255, 215, 0, 0.8),
+                0 0 25px rgba(255, 100, 100, 0.6);
+            animation: spinnerRotate 1.8s ease-in-out infinite;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .spinner-dot:nth-child(1) { animation-delay: 0s; }
+        .spinner-dot:nth-child(2) { animation-delay: 0.15s; }
+        .spinner-dot:nth-child(3) { animation-delay: 0.3s; }
+        .spinner-dot:nth-child(4) { animation-delay: 0.45s; }
+        .spinner-dot:nth-child(5) { animation-delay: 0.6s; }
+        .spinner-dot:nth-child(6) { animation-delay: 0.75s; }
+        .spinner-dot:nth-child(7) { animation-delay: 0.9s; }
+        .spinner-dot:nth-child(8) { animation-delay: 1.05s; }
+
+        @keyframes spinnerRotate {
+            0% { transform: rotate(0deg) translateX(28px) scale(0.6); opacity: 0.4; }
+            50% { transform: rotate(180deg) translateX(28px) scale(1.2); opacity: 1; }
+            100% { transform: rotate(360deg) translateX(28px) scale(0.6); opacity: 0.4; }
         }
 
-        @media (max-height: 700px) {
-             .header-content { margin-top: 2vh; }
-             .gift-animation-container { width: 80px; height: 80px; margin-bottom: 10px;}
-             .animated-gift { width: 60px; height: 60px; }
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .banner { padding: 15px; }
+            .title { margin-top: 20px; padding: 15px 25px; }
+            .wish-container { padding: 15px; }
+            .wish-text { padding: 20px; border-radius: 18px; max-width: 95%; }
+            .button-container { margin-bottom: 30px; }
+        }
+
+        @media (max-width: 480px) {
+            .title { font-size: 20px; padding: 12px 18px; }
+            .wish-text { font-size: 16px; padding: 18px; }
+            .wish-button { padding: 12px 25px; font-size: 17px; }
         }
     </style>
 </head>
@@ -365,109 +372,74 @@
     <div class="banner">
         <div class="particles" id="particles"></div>
         
-        <div class="header-content">
-            <div class="gift-animation-container">
-                <div class="gift-glow"></div>
-                <div class="sparkle"></div>
-                <div class="sparkle"></div>
-                <div class="sparkle"></div>
-                <div class="sparkle"></div>
-                <svg class="animated-gift" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="15" y="30" width="70" height="45" rx="8" fill="var(--gift-box-color)"/>
-                    <rect x="15" y="30" width="70" height="45" rx="8" fill="url(#boxGradient)"/>
-                    <path d="M15 30H85V75H15V30Z" fill="url(#stripes)"/>
-
-                    <path d="M15 30 L50 15 L85 30 L50 45 L15 30Z" fill="var(--gift-box-color)"/>
-                    <path d="M15 30 L50 15 L85 30 L50 45 L15 30Z" fill="url(#lidGradient)"/>
-                    <path d="M15 30 L50 15 L85 30 L50 45 L15 30Z" fill="url(#stripesLid)"/>
-
-                    <rect x="42.5" y="15" width="15" height="60" fill="var(--gift-ribbon-color)"/>
-                    <rect x="42.5" y="15" width="15" height="60" fill="url(#ribbonGradient)"/>
-
-                    <rect x="15" y="47.5" width="70" height="15" fill="var(--gift-ribbon-color)"/>
-                    <rect x="15" y="47.5" width="70" height="15" fill="url(#ribbonGradientH)"/>
-                    
-                    <path d="M50 15 C55 5 60 0 65 5 C70 10 65 15 60 20 C55 25 50 20 50 15Z" fill="var(--gift-ribbon-color)"/>
-                    <path d="M50 15 C45 5 40 0 35 5 C30 10 35 15 40 20 C45 25 50 20 50 15Z" fill="var(--gift-ribbon-color)"/>
-                    <circle cx="50" cy="15" r="5" fill="var(--gift-ribbon-shadow)"/>
-
-                    <defs>
-                        <linearGradient id="boxGradient" x1="50" y1="30" x2="50" y2="75" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#fff" stop-opacity="0.2"/>
-                            <stop offset="1" stop-color="#000" stop-opacity="0.1"/>
-                        </linearGradient>
-                        <linearGradient id="lidGradient" x1="50" y1="15" x2="50" y2="45" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#fff" stop-opacity="0.2"/>
-                            <stop offset="1" stop-color="#000" stop-opacity="0.1"/>
-                        </linearGradient>
-                        <linearGradient id="ribbonGradient" x1="50" y1="15" x2="50" y2="75" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#fff" stop-opacity="0.3"/>
-                            <stop offset="1" stop-color="#000" stop-opacity="0.2"/>
-                        </linearGradient>
-                         <linearGradient id="ribbonGradientH" x1="15" y1="55" x2="85" y2="55" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#fff" stop-opacity="0.2"/>
-                            <stop offset="1" stop-color="#000" stop-opacity="0.1"/>
-                        </linearGradient>
-
-                        <pattern id="stripes" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(45)">
-                            <line x1="0" y1="0" x2="0" y2="10" stroke="var(--gift-stripe-color)" stroke-width="2"/>
-                        </pattern>
-                         <pattern id="stripesLid" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(45)">
-                            <line x1="0" y1="0" x2="0" y2="10" stroke="var(--gift-stripe-color)" stroke-width="2"/>
-                        </pattern>
-                    </defs>
-                </svg>
-            </div>
-
-            <h1 class="title">С Новым 2026 Годом!</h1>
-            <p class="subtitle">Приготовьтесь получить ваше персональное новогоднее пожелание</p>
-            
-            <div class="decoration-sparks">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.39 9.61L22 12L14.39 14.39L12 22L9.61 14.39L2 12L9.61 9.61L12 2Z"/></svg>
-                <svg viewBox="0 0 24 24" fill="currentColor" style="transform: scale(0.7)"><path d="M12 2L14.39 9.61L22 12L14.39 14.39L12 22L9.61 14.39L2 12L9.61 9.61L12 2Z"/></svg>
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.39 9.61L22 12L14.39 14.39L12 22L9.61 14.39L2 12L9.61 9.61L12 2Z"/></svg>
-            </div>
-        </div>
+        <h1 class="title">🎄 Новогоднее Предсказание 2026 🎄</h1>
 
         <div class="wish-container">
             <div id="wishText" class="wish-text"></div>
             
             <div id="loadingContainer" class="loading-container">
-                <div class="spinner"></div>
-                <div class="loading-text">Магия Нового года загружается...</div>
+                <div class="loading-text">✨ Дед Мороз готовит для вас волшебное предсказание... ✨</div>
+                <div class="loading-spinner">
+                    <div class="spinner-dot"></div>
+                    <div class="spinner-dot"></div>
+                    <div class="spinner-dot"></div>
+                    <div class="spinner-dot"></div>
+                    <div class="spinner-dot"></div>
+                    <div class="spinner-dot"></div>
+                    <div class="spinner-dot"></div>
+                    <div class="spinner-dot"></div>
+                </div>
             </div>
         </div>
 
         <div id="buttonContainer" class="button-container">
-            <button id="wishButton" class="wish-button">
-                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 6V18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M6 10H18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M6 10V18H18V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6 10C6 10 7.5 6 12 6C16.5 6 18 10 18 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <span>Получить Пожелание</span>
-                <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2L14.39 9.61L22 12L14.39 14.39L12 22L9.61 14.39L2 12L9.61 9.61L12 2Z"/>
-                </svg>
-            </button>
+            <button id="wishButton" class="wish-button">🎁 Получить предсказание на 2026 год 🎁</button>
         </div>
     </div>
 
     <script>
-        // ====================================
-        // JS Logic (БЕЗ ИЗМЕНЕНИЙ)
-        // ====================================
-        const DOM = {
-            particles: document.getElementById('particles'),
-            wishButton: document.getElementById('wishButton'),
-            buttonContainer: document.getElementById('buttonContainer'),
-            wishText: document.getElementById('wishText'),
-            loadingContainer: document.getElementById('loadingContainer')
-        };
+        // Создание новогодних снежинок
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth < 768 ? 40 : 70;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const sizeType = Math.random();
+                if (sizeType > 0.7) {
+                    particle.classList.add('large');
+                } else if (sizeType < 0.3) {
+                    particle.classList.add('small');
+                }
+                
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                
+                const fallDuration = 5 + Math.random() * 13;
+                particle.style.animationDuration = fallDuration + 's';
+                
+                const drift = (Math.random() - 0.5) * 160;
+                particle.style.setProperty('--drift', drift + 'px');
+                
+                const baseOpacity = 0.6 + Math.random() * 0.3;
+                particle.style.opacity = baseOpacity;
+                
+                if (Math.random() < 0.4) {
+                    particle.style.animation += ', twinkle 2.5s ease-in-out infinite alternate';
+                    particle.style.animationDelay += ', ' + (Math.random() * 2) + 's';
+                }
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
 
-        const wishes2026 = [
-            "2026 год — год Огненной Лошади! Твоя карьера поскачет в гору с невероятной скоростью. Не бойся брать барьеры, победа будет за тобой!",
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            const wishes = [
+   "2026 год — год Огненной Лошади! Твоя карьера поскачет в гору с невероятной скоростью. Не бойся брать барьеры, победа будет за тобой!",
                 "В новом 2026 году тебя ждет грандиозное путешествие. Лошадь любит движение — собирай чемоданы, мир готов открыть тебе свои тайны!",
                 "Твоя энергия в 2026 году будет бить ключом! Это идеальное время, чтобы начать дело, о котором ты мечтал последнее время.",
                 "Огонь этого года разожжет в твоем сердце новые чувства. Любовь и страсть станут твоими главными спутниками в 2026 году.",
@@ -789,95 +761,52 @@
 "🏗️ В 2026 году ты построишь что-то важное: дом, карьеру или семью. Фундамент будет крепким, а стены надежными. Твой труд останется на века. Совет: строй на совесть! 🧱",
 
 "🦁 2026 год — это ТВОЙ год! Будь королем своей жизни, принимай решения и властвуй над обстоятельствами. Удача, успех и любовь уже ждут тебя у порога. Пожелание: бери от года всё! 🌟"
-        ];
-        
-        const TYPING_SPEED = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--typing-speed')) || 0.04;
-        const LOADING_TIME = 2500; 
-        const RESET_TIME = 2000; 
-
-        function createSnow() {
-            const count = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--snow-count')) || 60;
-
-            for (let i = 0; i < count; i++) {
-                const flake = document.createElement('div');
-                flake.className = 'particle';
-                
-                const size = Math.random() * 4 + 2 + 'px';
-                flake.style.width = size;
-                flake.style.height = size;
-                flake.style.left = Math.random() * 100 + '%';
-                flake.style.animationDuration = (Math.random() * 5 + 5) + 's';
-                flake.style.animationDelay = (Math.random() * 5) + 's';
-                flake.style.opacity = Math.random() * 0.5 + 0.3;
-
-                DOM.particles.appendChild(flake);
-            }
-        }
-
-        function animateText(text) {
-            DOM.wishText.innerHTML = ''; 
-            const words = text.split(' ');
-            let delay = 0;
+            ];
             
-            words.forEach(function(word, wordIndex) {
-                const wordSpan = document.createElement('span');
-                wordSpan.className = 'word';
-                
-                const characters = Array.from(word); 
-
-                characters.forEach(function(char) {
-                    const letterSpan = document.createElement('span');
-                    letterSpan.textContent = char;
-                    letterSpan.className = 'letter glowing';
-                    letterSpan.style.animationDelay = delay + 's';
-                    wordSpan.appendChild(letterSpan);
-                    delay += TYPING_SPEED; 
-                });
-
-                if (wordIndex < words.length - 1) {
-                    const spaceSpan = document.createElement('span');
-                    spaceSpan.textContent = '\u00A0'; 
-                    wordSpan.appendChild(spaceSpan);
-                }
-                
-                DOM.wishText.appendChild(wordSpan);
-            });
+            const wishButton = document.getElementById('wishButton');
+            const buttonContainer = document.getElementById('buttonContainer');
+            const wishText = document.getElementById('wishText');
+            const loadingContainer = document.getElementById('loadingContainer');
             
-            return delay * 1000;
-        }
-
-        function getPrediction() {
-            DOM.buttonContainer.style.opacity = 0;
-            DOM.buttonContainer.style.pointerEvents = 'none';
-            DOM.wishText.classList.remove('active');
-            DOM.loadingContainer.classList.add('active');
-
-            setTimeout(() => {
-                DOM.loadingContainer.classList.remove('active');
+            wishButton.addEventListener('click', function() {
+                buttonContainer.style.display = 'none';
+                loadingContainer.style.display = 'flex';
                 
-                const randomWish = wishes2026[Math.floor(Math.random() * wishes2026.length)];
+                const loadingTime = 2500 + Math.random() * 1500;
                 
-                const totalAnimationTime = animateText(randomWish);
-                DOM.wishText.classList.add('active');
-
                 setTimeout(() => {
-                    const buttonTextSpan = DOM.wishButton.querySelector('span');
-                    if(buttonTextSpan) {
-                         buttonTextSpan.textContent = "Получить еще одно";
-                    } else {
-                         DOM.wishButton.textContent = "Получить еще одно предсказание";
-                    }
-                   
-                    DOM.buttonContainer.style.opacity = 1;
-                    DOM.buttonContainer.style.pointerEvents = 'auto';
-                }, totalAnimationTime + RESET_TIME);
-                
-            }, LOADING_TIME); 
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            createSnow();
-            DOM.wishButton.addEventListener('click', getPrediction);
+                    loadingContainer.style.display = 'none';
+                    
+                    const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+                    
+                    wishText.style.display = 'block';
+                    wishText.innerHTML = '';
+                    
+                    const words = randomWish.split(' ');
+                    let delay = 0;
+                    
+                    words.forEach(function(word) {
+                        const wordSpan = document.createElement('span');
+                        wordSpan.className = 'word';
+                        
+                        // --- ВАЖНОЕ ИСПРАВЛЕНИЕ ЗДЕСЬ ---
+                        // Используем 'for ... of' вместо 'for (let i=0; i<length; i++)'
+                        // Это позволяет правильно обрабатывать смайлики (как один символ, а не два кода)
+                        for (const char of word) {
+                            const letterSpan = document.createElement('span');
+                            letterSpan.textContent = char;
+                            letterSpan.className = 'letter glowing';
+                            letterSpan.style.animationDelay = delay + 's';
+                            wordSpan.appendChild(letterSpan);
+                            delay += 0.04;
+                        }
+                        // --------------------------------
+                        
+                        wishText.appendChild(wordSpan);
+                    });
+                    
+                }, loadingTime);
+            });
         });
     </script>
 </body>
